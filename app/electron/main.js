@@ -29,7 +29,7 @@ const loadMainWindow = () => {
         }
     });
 
-    mainWindow.loadFile(path.join(__dirname, "../../../musashi-app/index.html"));
+    mainWindow.loadFile(path.join(__dirname, "../../index.html"));
 }
 
 app.on("ready", loadMainWindow);
