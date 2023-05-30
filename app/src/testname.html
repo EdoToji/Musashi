@@ -1,0 +1,42 @@
+<html><head>
+    <title>Developer Drive | Allowing Users to Edit Text Content with HTML5 | Demo</title>
+    <style type="text/css">
+    #edit {background-color: white;}
+    </style>
+    <script type="text/javascript">
+    function saveEdits() {
+    
+    //get the editable element
+    var editElem = document.getElementById("edit");
+    
+    //get the edited element content
+    var userVersion = editElem.innerHTML;
+    
+    //save the content to local storage
+    localStorage.userEdits = userVersion;
+    
+    //write a confirmation to the user
+    document.getElementById("update").innerHTML="Edits saved!";
+    
+    }
+    function checkEdits() {
+    
+    //find out if the user has previously saved edits
+    if(localStorage.userEdits!=null)
+        document.getElementById("edit").innerHTML=localStorage.userEdits;
+    }
+    </script>
+    </head>
+    <div onload="checkEdits()">
+    
+    
+    <h3>
+        Welcome Back <div id="edit" contenteditable="true">
+            User
+            </div>
+    </h3>
+    
+    <input type="button" value="Save" onclick="saveEdits()">
+
+    </div>
+

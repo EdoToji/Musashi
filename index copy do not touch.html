@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Musashi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="/assets/favicon.ico">
+<link rel="stylesheet" href="frontend/draganddrop/main.css">
+<link rel="stylesheet" href="frontend/navbar/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<script src="draganddrop/main.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+  html,body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn"><img src="frontend/images/white-musashi-logo.png" style="width:150px; padding-left: 15px;" alt="Musashi" class="center">
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Settings</a>
+      <a href="#">Account</a>
+      <a href="#">Exit</a>
+    </div>
+  </div> 
+  <div class="topnav-right">
+    <a class="active" href="#home"><img src="frontend/images/icons/home-icon.svg"  style="width:20px; "></i> Home</a>
+    <a href="#news" id="myBtn"><img src="frontend/images/icons/encrypt-icon.svg"  style="width:20px; color:white"> Encrypt/Decrypt</a>
+    <a href="#contact"><img src="frontend/images/icons/steg-icon.svg"  style="width:20px; "> Steganography</a>
+    <a href="#search"><img src="frontend/images/icons/message-icon.svg"  style="width:25px; "> Message</a>
+    <a href="#about"><img src="frontend/images/icons/password-icon.svg"  style="width:20px; "> Password Manager</a>
+  </div>
+</div>
+
+    
+    <section>
+        <div style="padding-left:16px">
+            <h3 style="font-weight: bold;">Welcome Back!</h3>
+            <div class="search-container topnav-left" style="padding-right: 10px;">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search your files ..." name="search">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <h3 style="font-weight: bold; padding-left:16px">Upload Files</h3>
+    <div id="drop-area">
+        <form class="my-form">
+          <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+          <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+          <label class="button" for="fileElem">Select some files</label>
+        </form>
+        <progress id="progress-bar" max=100 value=0></progress>
+        <div id="gallery" /></div>
+      </div>
+      <!--
+      <div class="note"><strong>Note: I've Removed the ability to actually upload files (it will error out silently since there is no error handler, so it'll still appear to work) because you guys were constantly filling up my Cloudinary account. Please <a href="https://cloudinary.com/invites/lpov9zyyucivvxsnalc5/j6iiupngdmwwwqspjtml">create your own account</a> and replace the "joezim007" 
+        and "ujpu6gyk" bits in the JavaScript with your own account's information.</strong></div>
+        -->
+        <script src="main.js"></script>
+<div>
+  <h3 style="font-weight: bold; padding-left:16px">Your Files</h3>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-header">
+    <span class="close">&times;</span>
+    <h5>Encrypt/Decrypt Modal</h5>
+  </div>
+  <div class="modal-body">
+    <div id="drop-area">
+      <form class="my-form">
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+        <label class="button" for="fileElem">Select some files</label>
+      </form>
+      <progress id="progress-bar" max=100 value=0></progress>
+      <div id="gallery" /></div>
+    </div>
+    <!--<div class="note"><strong>Note: I've Removed the ability to actually upload files (it will error out silently since there is no error handler, so it'll still appear to work) because you guys were constantly filling up my Cloudinary account. Please <a href="https://cloudinary.com/invites/lpov9zyyucivvxsnalc5/j6iiupngdmwwwqspjtml">create your own account</a> and replace the "joezim007" 
+    and "ujpu6gyk" bits in the JavaScript with your own account's information.</strong></div>-->
+    <script src="main.js"></script>
+
+
+
+  <div id="password-container" class="text-align: center">
+    <input type="password" id="password-input" placeholder="Enter Password"/>
+    <label id="toggle-password" for="password-input"> Show</label>
+  </div>
+  <div id="encrypt-decrypt-btn-container">
+    <button id="encrypt-btn">Encrypt</button>
+    <button id="decrypt-btn">Decrypt</button>
+  </div>
+<!--
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div> -->
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</body>
+</html>

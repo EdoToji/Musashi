@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Musashi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="/assets/favicon.ico">
+<link rel="stylesheet" href="frontend/draganddrop/main.css">
+<link rel="stylesheet" href="frontend/navbar/style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<script src="draganddrop/main.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<style>
+  html,body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
+
+  .solid {border-style: solid;}
+
+  .form{
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  border-radius: 12px;
+  font-weight: bold;
+  width: 400px;
+  height: 150px;
+  background-color: white;
+  color: black;
+}
+.edit {background-color: white;}
+  
+.dark-mode {
+  background-color: #5A5A5A;
+  color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #9f83e9;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.source-image{
+  /*height: 35px;*/
+  width: 25%;
+}
+
+.hide{
+  border: 5px solid;
+  border-color: black;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.solid {
+  border-style: solid;
+  border-color: #9f83e9;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.btns {
+  background-color: #c6b5f4;
+  border-radius: 8px;
+  font-size: 15px;
+  padding: 8px;
+}
+
+input[type=checkbox] {
+	margin-right: 0;
+}
+
+.password-container {
+	box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.2);
+	padding: 20px;
+	width: 350px;
+	max-width: 100%;
+}
+
+.result-container {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	font-size: 18px;
+	letter-spacing: 1px;
+	padding: 12px 10px;
+	height: 50px;
+	width: 100%;
+	border-radius: 8px;
+}
+
+.result-container #result {
+  	word-wrap: break-word;
+	max-width: calc(100% - 40px);
+}
+
+.result-container .btn {
+	font-size: 20px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 40px;
+	width: 40px;
+}
+
+.btn {
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	padding: 8px 12px;
+	background-color: #c6b5f4;
+	border-radius: 8px;
+}
+
+.btn-large {
+	display: block;
+	width: 100%;
+}
+
+.setting {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 15px 0;
+}
+
+@media screen and (max-width: 400px) {
+	.result-container {
+		font-size: 14px;
+	}
+}
+
+/* SOCIAL PANEL CSS */
+.social-panel-container {
+	position: fixed;
+	right: 0;
+	bottom: 80px;
+	transform: translateX(100%);
+	transition: transform 0.4s ease-in-out;
+}
+
+.social-panel-container.visible {
+	transform: translateX(-10px);
+}
+
+.social-panel {	
+	background-color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 16px 31px -17px rgba(0,31,97,0.6);
+	border: 5px solid #001F61;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Muli';
+	position: relative;
+	height: 169px;	
+	width: 370px;
+	max-width: calc(100% - 10px);
+}
+
+.social-panel button.close-btn {
+	border: 0;
+	color: #97A5CE;
+	cursor: pointer;
+	font-size: 20px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.social-panel button.close-btn:focus {
+	outline: none;
+}
+
+.social-panel p {
+	background-color: #001F61;
+	border-radius: 0 0 10px 10px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 18px;
+	padding: 2px 17px 6px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin: 0;
+	transform: translateX(-50%);
+	text-align: center;
+	width: 235px;
+}
+
+.social-panel p i {
+	margin: 0 5px;
+}
+
+.social-panel p a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+.social-panel h4 {
+	margin: 20px 0;
+	color: #97A5CE;	
+	font-family: 'Muli';	
+	font-size: 14px;	
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.social-panel ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.social-panel ul li {
+	margin: 0 10px;
+}
+
+.social-panel ul li a {
+	border: 1px solid #DCE1F2;
+	border-radius: 50%;
+	color: #001F61;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	width: 50px;
+	text-decoration: none;
+}
+
+.social-panel ul li a:hover {
+	border-color: #FF6A00;
+	box-shadow: 0 9px 12px -9px #FF6A00;
+}
+
+.floating-btn {
+	border-radius: 26.5px;
+	background-color: #001F61;
+	border: 1px solid #001F61;
+	box-shadow: 0 16px 22px -17px #03153B;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 12px 20px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 999;
+}
+
+.floating-btn:hover {
+	background-color: #ffffff;
+	color: #001F61;
+}
+
+.floating-btn:focus {
+	outline: none;
+}
+
+.floating-text {
+	background-color: #001F61;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-family: 'Muli';
+	padding: 7px 15px;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	z-index: 998;
+}
+
+.floating-text a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+
+	.social-panel-container.visible {
+		transform: translateX(0px);
+	}
+	
+	.floating-btn {
+		right: 10px;
+	}
+}
+
+.button1 {
+  background-color: #ccc;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+.button2:hover {
+  background-color: #333;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+<div class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn"><img src="frontend/images/white-musashi-logo.png" style="width:150px; padding-left: 15px;" alt="Musashi" class="center">
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Settings</a>
+      <a href="#">Account</a>
+      <a href="#">Exit</a>
+    </div>
+  </div> 
+
+  <div class="topnav-right">
+    <a class="active" href="#home" style="display:inline;"><img src="frontend/images/icons/home-icon.svg"  style="width:15px; ">Home</a>
+    <a id="myModal" href="#encrypt" class="myBtn_multi"><img src="frontend/images/icons/encrypt-icon.svg"  style="width:15px; color:white"> Encrypt/Decrypt</a>
+    <a href="#steg" class="myBtn_multi"><img src="frontend/images/icons/steg-icon.svg"  style="width:15px; "> Steganography</a>
+    <a href="#finf" class="myBtn_multi"><img src="frontend/images/icons/fileinafile-icon.webp"  style="width:20px; "> File in a File</a>
+    <a href="#shredder" class="myBtn_multi"><img src="frontend/images/icons/fileinafile-icon.webp"  style="width:20px; "> File Shredder</a>
+    <a href="#password" class="myBtn_multi"><img src="frontend/images/key-solid-white.svg"style="width:20px; color:white"> Password Generator</a>
+  </div>
+</div>
+
+    
+    <section>
+        <div style="padding-left:16px">
+            <h3 style="font-weight: bold;">Welcome Back!</h3>
+            <div class="search-container topnav-left" style="padding-right: 10px;">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search your files ..." name="search">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <h3 style="font-weight: bold; padding-left:16px">Upload Files</h3>
+    <div id="drop-area">
+        <form class="my-form">
+          <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+          <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+          <label class="button" for="fileElem">Select some files</label>
+        </form>
+        <progress id="progress-bar" max=100 value=0></progress>
+        <div id="gallery" /></div>
+      
+      </div>
+    </div>
+      </div>
+      <!--
+      <div class="note"><strong>Note: I've Removed the ability to actually upload files (it will error out silently since there is no error handler, so it'll still appear to work) because you guys were constantly filling up my Cloudinary account. Please <a href="https://cloudinary.com/invites/lpov9zyyucivvxsnalc5/j6iiupngdmwwwqspjtml">create your own account</a> and replace the "joezim007" 
+        and "ujpu6gyk" bits in the JavaScript with your own account's information.</strong></div>
+        -->
+        <script src="main.js"></script>
+<div>
+  <h3 style="font-weight: bold; padding-left:16px">Your Files</h3>
+</div>
+
+<!-- MODAL SECTION -->
+<div>
+
+  <!-- The Encrypt/Decrypt Modal -->
+  <div>
+    <div class="modal modal_multi">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header" style="padding-bottom: 10px;">
+          <span class="close close_multi">×</span>
+          <h5>Encrypt/Decrypt Modal</h5>
+      </div>
+
+      <div class="modal-body">
+        <div id="browse-container" class="border-2 border-neutral-800 p-3 flex justify-center gap-4">
+          <label class="w-full bg-neutral-200 text-black p-[5.5px] rounded-sm hover:bg-neutral-300 hover:cursor-pointer active:scale-[0.99] transition-all duration-[0.05s]">
+            📄 Files <input id="file-picker" type="file" multiple="multiple" class="hidden" />
+          </label>
+                  
+          <label class="w-full bg-neutral-200 text-black p-[5.5px] rounded-sm hover:bg-neutral-300 hover:cursor-pointer active:scale-[0.99] transition-all duration-[0.05s]">
+            📁 Folders <input id="folder-picker" type="file" webkitdirectory mozdirectory msdirectory odirectory directory multiple class="hidden"/>
+          </label>
+        </div>
+            
+        <div id="password-container" class="border-2 border-neutral-800 p-3 py-[10px] flex justify-around items-center content-center">
+          <input type="password" id="password-input" placeholder="Enter Password" 
+          class="text-black bg-neutral-100 w-full rounded-sm rounded-tr-none rounded-br-none h-8 px-2 focus:outline-none focus:border-yellow-500 focus:border-2"/>
+          <label id="toggle-password" for="password-input" class="w-16 bg-neutral-200 rounded-sm rounded-bl-none h-8 rounded-tl-none p-1 px-2 hover:bg-neutral-300 hover:cursor-pointer"> 
+            Show
+          </label>
+      </div>
+            
+                <div
+                  id="files-container"
+                  class="border-2 border-neutral-800 w-auto h-[300px] overflow-auto whitespace-nowrap scrollbar scroll-smooth">
+                  <span
+                    id="files-container-title"
+                    class="sticky bg-neutral-300 top-0 left-0 h-[35px] flex justify-center items-center font-semibold text-lg">
+                    Selected Files
+                  </span>
+                  <ul
+                    id="selected-files">
+                  </ul>
+                </div>
+                
+                <button
+                  disabled
+                  id="clear-btn"
+                  class="w-full bg-blue-200 h-8 text-black font-semibold text-lg hover:bg-blue-300 opacity-10">
+                  Clear All
+                </button>
+            
+                <div
+                  id="encrypt-decrypt-btn-container"
+                  class="border-2 border-neutral-800 p-3 flex justify-center gap-4">
+                  <button
+                    id="encrypt-btn"
+                    class="w-full bg-[#fff0f0] text-black flex justify-center items-center p-[5.5px] rounded-sm hover:bg-red-200 active:scale-[0.98] transition-all duration-[0.05s]">
+                    <img
+                      src="assets/lock.svg"
+                      alt="locked padlock"
+                      class="pr-px">
+                    Encrypt
+                  </button>
+                  <button
+                    id="decrypt-btn"
+                    class="w-full bg-[#f1fff0] text-black flex justify-center items-center p-[5.5px] rounded-sm hover:bg-green-200 active:scale-[0.98] transition-all duration-[0.05s]">
+                    <img
+                      src="assets/unlock.svg"
+                      alt="unlocked padlock"
+                      class="pr-px">
+                    Decrypt
+                  </button>
+                </div>
+            
+                <p
+                  id="message-box"
+                  class="mx-2 my-[10px] font-semibold h-[33px] px-4 flex items-center justify-center rounded-full text-black bg-neutral-100 opacity-10">
+                </p>
+            
+                <div class="px-2">
+                  <div
+                    id="progress-bar-container"
+                    class="bg-neutral-100 w-full h-3 flex items-center rounded overflow-hidden opacity-10">
+                      <div
+                        id="progress-bar"
+                        class="h-full rounded w-full">
+                      </div>
+                  </div>
+                </div>
+            
+                <div class="px-2">
+                  <button
+                    disabled
+                    id="reset-btn"
+                    class="bg-blue-200 text-black text-lg h-[34px] font-medium tracking-wide w-full rounded mt-3 hover:bg-blue-300 active:scale-x-[0.99] transition-all duration-[0.05s] opacity-10">
+                    Reset
+                  </button>
+                </div>
+
+            </div>
+          
+          </div>
+          
+      </div> 
+
+  </div>
+
+
+
+  <!-- The Steg Modal -->
+  <div>
+    <div  class="modal modal_multi">
+      <div id="steg-tool">
+          <div class="modal-content" style="border-radius: 10px;">
+    
+              <div class="modal-header">
+                  <span class="close close_multi">×</span>
+                  <h5>Steganography Modal</h5>
+              </div>
+    
+              <div style="padding: 15px;" class="solid">
+                  <h2>Hide Message</h2>
+                  <div id="text-box">
+                  <textarea id="text" type="text" rows="3" cols="30" placeholder="Write your message here"></textarea>
+                  </div>
+              </div>
+    
+        
+              <div class="btns">
+                  <input type="file" name="img" id="img-input" accept="image/*" onchange="readURL(this)">
+                  <button class="button1 button2" id="hide" onclick="hideText()">Hide Message</button>
+                  <a class="button1 button2" id="download" download="encrypted-img.png" rel="nofollow"><strong>Download</strong></a>
+              </div>
+    
+              <div class="row">
+    
+                  <div class="column">
+                    <div id="source-image" style="height: 250px; width: 150px;">
+                      <h5>Original Image:</h5> 
+                      <img id="image1" src="" alt="" style="">
+                    </div>
+                  </div>
+            
+                  <div class="column">
+                    <div id="encoded-image"style="height: 250px; width: 150px;">
+                      <h5>Encoded Image:</h5>
+                      <img id="image2" src="" alt="">
+                    </div>
+                  </div>
+            
+                </div>
+    
+              <div id="msg-decode" style="padding: 15px;">
+                  <h2 style="padding: 15px;">Decode Message</h2>
+                  <input type="file" name="img1" id="coded" accept="image/*">
+                  <button class="button1 button2" id="decode" onclick="decode(document.getElementById('coded'))">Decode Message</button>
+              </div>
+    
+              <div id="decoded-message">
+                  <textarea id="decoded" rows="3" cols="30" placeholder="The hidden message is..."></textarea>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--File in a File Modal -->
+  <div>
+    <div  class="modal modal_multi">
+      <!-- Modal content -->
+      <div class="modal-content">
+      <div class="modal-header">
+        <span class="close close_multi">×</span>
+        <h5>File in a PDF Modal</h5>
+      </div>
+      <h2>Hide a file in a PDF</h2>
+      <input type="file"
+            name="pdf"
+            id="pdf-file"
+            accept=".pdf">
+      <input type="file"
+            name="file-to-embed"
+            id="file-to-embed">
+
+      <div class="btns">
+        <button class="btn btn-large"  style="background-color: #333;"id="embed">Hide in PDF</button>
+      </div>
+    
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- File Shredder Modal -->
+  <div>
+  <div class="modal modal_multi">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close close_multi">×</span>
+        <h5>File Shredder Modal</h5>
+      </div>
+      <h2>Shred a File</h2>
+      <input type="file" name="file-to-shred" id="file-to-shred">
+      <p id="shredded"></p>
+
+      <div class="btns">
+        <button class="btn btn-large"  style="background-color: #333;" id="shred">Shred File</button>
+      </div>
+
+    </div>
+
+
+  </div>
+  </div>
+
+
+
+  <!-- The Password Generator Modal -->
+  <div>
+    <div  class="modal modal_multi">
+
+      <!-- Modal content -->
+      <div class="modal-content" style="width:750px; height: 500px; background-color: rgb(245, 243, 243);">
+        <div class="modal-header" style="padding-bottom: 10px;">
+          <span class="close close_multi">×</span>
+          <h5>Password Generator Modal</h5>
+        </div>
+    
+    <!--Password Generator-->
+    <div class="password-container" style="text-align: center; justify-content: center; padding-left: 100px; width: 700px;">
+      <h2>Password Generator</h2>
+      <div class="result-container">
+        <span id="result"></span>
+        <button class="btn" id="clipboard">
+          <img src="frontend/images/clipboard-solid-white.svg" style="width:15px">
+        </button>
+      </div>
+      <div class="settings">
+        <div class="setting">
+          <label>Password length</label>
+          <input type="number" id="length" min='4' max='20' value='20' />
+        </div>
+        <div class="setting">
+          <label>Include uppercase letters</label> 
+          <input type="checkbox" id="uppercase" checked />
+        </div>
+        <div class="setting">
+          <label>Include lowercase letters</label> 
+          <input type="checkbox" id="lowercase" checked />
+        </div>
+        <div class="setting">
+          <label>Include numbers</label> 
+          <input type="checkbox" id="numbers" checked />
+        </div>
+        <div class="setting">
+          <label>Include symbols</label> 
+          <input type="checkbox" id="symbols" checked />
+        </div>
+      </div>
+      <button class="btn btn-large"  style="background-color: #333;"id="generate">
+        Generate password
+      </button>
+    </div>
+    
+        </div>
+    </div>
+  </div>
+
+</div>
+<!-- END OF MODAL SECTION -->
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</body>
+</html>
