@@ -7,7 +7,7 @@ This multi-tool includes the following:
    ![image](https://github.com/EdoToji/Musashi/assets/48575959/46d84dcc-194f-4e4f-bc05-8da2a216a7eb)
 
 2. Steganography ---
-     encoding a text into an image file
+     encoding text into an image file
    ![image](https://github.com/EdoToji/Musashi/assets/48575959/25fc4929-f92d-499f-99cd-edb9626f5e54)
 
 3. File in a PDF ---
